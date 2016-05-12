@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
+    default-lazy-init="false">
+    
+ <!-- 添加调度的任务bean 配置对应的class-->
+  <bean id="Schedule" class="com.iwooto.quartz.Schedule" />
+  <!--配置调度具体执行的方法-->
+  <bean id="myTriggerDetail"
+    class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="Schedule" />
+    <property name="targetMethod" value="init" />
+    <!-- 是否允许并行执行 -->
+    <property name="concurrent" value="false" />
+    <!-- 方法带有参数 -->
+    <!-- <property name="arguments" value="argsValue"/>--> 
+  </bean>
+  <!--配置调度执行的触发的时间-->
+  <bean id="myTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+    <property name="jobDetail" ref="myTriggerDetail" />
+  	<property name="startDelay" value="0" />
+ 	<property name="repeatInterval" value="30000" />
+
+  </bean>
+  <!-- quartz的调度工厂 调度工厂只能有一个，多个调度任务在list中添加 -->
+  <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+      <list>
+         <!-- 所有的调度列表--><!-- 
+        <ref local="myTrigger" /> -->
+      </list>
+    </property> 
+  </bean>
+</beans>

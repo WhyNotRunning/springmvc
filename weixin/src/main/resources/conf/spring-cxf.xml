@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cxf="http://cxf.apache.org/core"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://cxf.apache.org/core
+       http://cxf.apache.org/schemas/core.xsd
+       http://cxf.apache.org/jaxws
+       http://cxf.apache.org/schemas/jaxws.xsd">
+       
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<bean id="serverPasswordCallback" class="com.iwooto.webservice.ServerPasswordCallback" />
+	<!-- 安全认证开始 --> 
+    <bean id="WSS4JInInterceptor"  class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">  
+        <constructor-arg>  
+            <map>  
+                <!-- 设置加密类型 -->  
+                <entry key="action" value="UsernameToken" />  
+                <!-- 设置密码类型为明文 -->  
+                <entry key="passwordType" value="PasswordText" />  
+                <!--<entry key="action" value="UsernameToken Timestamp" /> 设置密码类型为加密
+                <entry key="passwordType" value="PasswordDigest" /> -->  
+                <entry key="passwordCallbackRef" value-ref="serverPasswordCallback"/>  
+            </map>  
+        </constructor-arg>  
+    </bean> 
+	<!-- 安全认证结束 --> 
+	
+	<!-- <jaxws:endpoint id="helloWorld" implementor="demo.spring.service.HelloWorldImpl"
+		address="/HelloWorld" /> -->
+	<bean id="hello" class="com.iwooto.webservice.HelloworldImpl" />
+	<jaxws:endpoint id="helloWorld" implementor="#hello" address="/Helloworld" />
+	
+	
+    <!-- 开始 --> 
+    <bean id="message" class="com.iwooto.webservice.MessageImpl"/> 
+    <jaxws:endpoint id="messageService" implementor="#message" address="/messageService" > 
+        <jaxws:inInterceptors> 
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor" />  
+            <ref bean="WSS4JInInterceptor" />  
+        </jaxws:inInterceptors>  
+    </jaxws:endpoint> 
+    <!-- 结束 --> 
+    
+    <!-- 
+    <cxf:bus>
+        <cxf:features>
+            <cxf:logging/>
+        </cxf:features>
+    </cxf:bus> -->
+</beans>

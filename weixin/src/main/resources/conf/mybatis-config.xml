@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 命名空间 -->
+	<typeAliases>
+		<!-- <typeAlias alias="SysUser" type="com.iwooto.entity.SysUser" /> -->
+	</typeAliases>
+	 <!-- <plugins>  
+       <plugin interceptor="com.drawback.inteceptor.PageInteceptor">  
+           <property name="dialect" value="sqlServer"/>
+           拦截Mapper.xml文件中，id包含query字符的语句   
+           <property name="pageSqlId" value="ByPage"/>     
+       </plugin>  
+    </plugins>  --> 
+	<!-- 映射map -->
+	<mappers>
+		<!-- <mapper resource="com/drawback/mapper/SysUserMapper.xml"/> -->
+	</mappers>
+</configuration>

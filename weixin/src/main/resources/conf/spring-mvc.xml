@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:mvc="http://www.springframework.org/schema/mvc" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p" 
+xmlns:context="http://www.springframework.org/schema/context" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+http://www.springframework.org/schema/mvc 
+http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+    <bean id="utf8Charset" class="java.nio.charset.Charset"
+          factory-method="forName">
+        <constructor-arg value="UTF-8"/>
+    </bean>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg ref="utf8Charset"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
+	<context:component-scan base-package="com.iwooto.controller" />   
+   <!-- 开启注解(在spring中默认情况下，注解是关闭的) -->
+    <mvc:annotation-driven/>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >
+	<!-- <property name="messageConverters">
+			<list >
+				<ref bean="mappingJacksonHttpMessageConverter"/>
+			</list>
+		</property> -->
+	</bean>    
+	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+	<!-- <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>  --> 
+
+ 	<!-- 静态资源(js/image)的访问 -->
+ 	<mvc:resources location="/assets/" mapping="/assets/**" />
+ 	<mvc:resources location="/bootstrap/" mapping="/bootstrap/**" />
+    <mvc:resources location="/js/" mapping="/js/**" />
+    <mvc:resources location="/scripts/" mapping="/scripts/**" />
+    
+    <!-- 静态资源(css/)的访问 -->
+    <mvc:resources location="/css/" mapping="/css/**" />
+    <!-- 静态资源(image)的访问 -->
+    <mvc:resources location="/images/" mapping="/images/**" />
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>	
+  
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="maxUploadSize">
+			<value>104857600</value><!-- 上传文件大小限制为100M，100*1024*1024 -->
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+		<property name="resolveLazily" value="true"/> 
+	</bean>
+	
+	<mvc:interceptors>
+  		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/login"/>
+			<mvc:exclude-mapping path="/check"/>
+			<mvc:exclude-mapping path="/gotologin"/>
+			<mvc:exclude-mapping path="/bootstrap/**"/>
+			<mvc:exclude-mapping path="/images/**"/>
+			<mvc:exclude-mapping path="/css/**"/>
+			<mvc:exclude-mapping path="/js/**"/>
+			<!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 --> 
+			<bean id="userInteceptor" class="com.iwooto.inteceptor.UserInteceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> 
+</beans>
