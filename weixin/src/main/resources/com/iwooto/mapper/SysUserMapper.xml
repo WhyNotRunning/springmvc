@@ -1,202 +1,117 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.iwooto.dao.SysUserDao" >
-  <resultMap id="BaseResultMap" type="com.iwooto.entity.SysUser" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="login" property="login" jdbcType="VARCHAR" />
-    <result column="Password" property="password" jdbcType="VARCHAR" />
-    <result column="Role" property="role" jdbcType="INTEGER" />
-    <result column="lastTime" property="lasttime" jdbcType="TIMESTAMP" />
-    <result column="Remark" property="remark" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="INTEGER" />
-    
-     <result column="hgqy_dm" property="hgqyDm" jdbcType="VARCHAR" />
-     <result column="nsr_name" property="nsrName" jdbcType="VARCHAR" />
-     <result column="nsr_sbh" property="nsrSbh" jdbcType="VARCHAR" />
-    
-    
-    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="creator" property="creator" jdbcType="VARCHAR" />
+<mapper namespace="com.iwooto.dao.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.iwooto.bean.SysUser" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="organization_id" property="organizationId" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="role_ids" property="roleIds" jdbcType="VARCHAR" />
+    <result column="locked" property="locked" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, login, Password, Role, lastTime, Remark, type,hgqy_dm,nsr_name,nsr_sbh,createtime, creator
+    id, organization_id, username, password, salt, role_ids, locked
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from sys_user
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from sys_user
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.iwooto.entity.SysUser" >
-    insert into sys_user (id, name, login, 
-      Password, Role, lastTime, 
-      Remark, type,hgqy_dm,nsr_name,nsr_sbh, createtime, 
-      creator)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{login,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{lasttime,jdbcType=TIMESTAMP}, 
-      #{remark,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
-      #{hgqyDm,jdbcType=VARCHAR}, #{nsrName,jdbcType=VARCHAR}, #{nsrSbh,jdbcType=VARCHAR},
-      #{createtime,jdbcType=TIMESTAMP}, 
-      #{creator,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.iwooto.bean.SysUser" >
+    insert into sys_user (id, organization_id, username, 
+      password, salt, role_ids, 
+      locked)
+    values (#{id,jdbcType=BIGINT}, #{organizationId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{roleIds,jdbcType=VARCHAR}, 
+      #{locked,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.iwooto.entity.SysUser" >
+  <insert id="insertSelective" parameterType="com.iwooto.bean.SysUser" >
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="organizationId != null" >
+        organization_id,
       </if>
-      <if test="login != null" >
-        login,
+      <if test="username != null" >
+        username,
       </if>
       <if test="password != null" >
-        Password,
+        password,
       </if>
-      <if test="role != null" >
-        Role,
+      <if test="salt != null" >
+        salt,
       </if>
-      <if test="lasttime != null" >
-        lastTime,
+      <if test="roleIds != null" >
+        role_ids,
       </if>
-      <if test="remark != null" >
-        Remark,
-      </if>
-      <if test="type != null" >
-        type,
-      </if>
-       <if test="hgqyDm != null" >
-        hgqy_dm,
-      </if>
-       <if test="nsrName != null" >
-        nsr_name,
-      </if>
-       <if test="nsrSbh != null" >
-        nsr_sbh,
-      </if>
-      <if test="createtime != null" >
-        createtime,
-      </if>
-      <if test="creator != null" >
-        creator,
+      <if test="locked != null" >
+        locked,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=BIGINT},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="organizationId != null" >
+        #{organizationId,jdbcType=BIGINT},
       </if>
-      <if test="login != null" >
-        #{login,jdbcType=VARCHAR},
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="role != null" >
-        #{role,jdbcType=INTEGER},
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
       </if>
-      <if test="lasttime != null" >
-        #{lasttime,jdbcType=TIMESTAMP},
+      <if test="roleIds != null" >
+        #{roleIds,jdbcType=VARCHAR},
       </if>
-      <if test="remark != null" >
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=INTEGER},
-      </if>
-       <if test="hgqyDm != null" >
-         #{hgqyDm,jdbcType=VARCHAR},
-      </if>
-       <if test="nsrName != null" >
-        #{nsrName,jdbcType=VARCHAR},
-      </if>
-       <if test="nsrSbh != null" >
-         #{nsrSbh,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="creator != null" >
-        #{creator,jdbcType=VARCHAR},
+      <if test="locked != null" >
+        #{locked,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.iwooto.entity.SysUser" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwooto.bean.SysUser" >
     update sys_user
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="organizationId != null" >
+        organization_id = #{organizationId,jdbcType=BIGINT},
       </if>
-      <if test="login != null" >
-        login = #{login,jdbcType=VARCHAR},
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
-        Password = #{password,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="role != null" >
-        Role = #{role,jdbcType=INTEGER},
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
       </if>
-      <if test="lasttime != null" >
-        lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      <if test="roleIds != null" >
+        role_ids = #{roleIds,jdbcType=VARCHAR},
       </if>
-      <if test="remark != null" >
-        Remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=INTEGER},
-      </if>
-       <if test="hgqyDm != null" >
-        hgqy_dm = #{hgqyDm,jdbcType=VARCHAR},
-      </if>
-       <if test="nsrName != null" >
-        nsr_name = #{nsrName,jdbcType=VARCHAR},
-      </if>
-       <if test="nsrSbh != null" >
-        nsr_sbh = #{nsrSbh,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="creator != null" >
-        creator = #{creator,jdbcType=VARCHAR},
+      <if test="locked != null" >
+        locked = #{locked,jdbcType=BIT},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.iwooto.entity.SysUser" >
+  <update id="updateByPrimaryKey" parameterType="com.iwooto.bean.SysUser" >
     update sys_user
-    set name = #{name,jdbcType=VARCHAR},
-      login = #{login,jdbcType=VARCHAR},
-      Password = #{password,jdbcType=VARCHAR},
-      Role = #{role,jdbcType=INTEGER},
-      lastTime = #{lasttime,jdbcType=TIMESTAMP},
-      Remark = #{remark,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
-       hgqy_dm = #{hgqyDm,jdbcType=VARCHAR},
-        nsr_name = #{nsrName,jdbcType=VARCHAR},
-         nsr_sbh = #{nsrSbh,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      creator = #{creator,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    set organization_id = #{organizationId,jdbcType=BIGINT},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      role_ids = #{roleIds,jdbcType=VARCHAR},
+      locked = #{locked,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="querySysUserList" resultMap="BaseResultMap">
-  	select * from sys_user
-  </select>
-  <select id="getSysUserListCount" resultType="java.lang.Integer">
-  	select count(*) from sys_user
-  </select>
-  <select id="getSysUser" parameterType="com.iwooto.entity.SysUser" resultMap="BaseResultMap">
-      select  top 1 <include refid="Base_Column_List"/>
-      from sys_user where
-      login = #{login,jdbcType=VARCHAR} and
-      Password = #{password,jdbcType=VARCHAR}
-  </select>
 </mapper>

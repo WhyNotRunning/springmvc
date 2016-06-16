@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+   <classPathEntry
+            location="D:/Maven/.m2/repository/mysql/mysql-connector-java/5.1.29/mysql-connector-java-5.1.29.jar"/>
+  <context id="context1"  targetRuntime="MyBatis3">
+    <property name="beginningDelimiter" value="`"/>
+    <property name="endingDelimiter" value="`"/>
+
+    <commentGenerator>
+        <property name="suppressDate" value="true"/>
+        <property name="suppressAllComments" value="true"/>
+    </commentGenerator>
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+    connectionURL="jdbc:mysql://localhost:3306/test" userId="root" password="root" />
+    <javaModelGenerator targetPackage="com.iwooto.bean" targetProject="weixin">
+        <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+    <sqlMapGenerator targetPackage="com.iwooto.mapper" targetProject="weixin\src\main\resources" />
+    <javaClientGenerator targetPackage="com.iwooto.dao" targetProject="weixin" type="XMLMAPPER" />
+    
+    <table tableName="sys_user" domainObjectName="SysUser"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false">
+    </table>
+    <table tableName="sys_role" domainObjectName="SysRole"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false">
+    </table>
+    <table tableName="sys_organization" domainObjectName="SysOrganization"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false">
+    </table>
+    <table tableName="sys_resource" domainObjectName="SysResource"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false">
+    </table>
+  </context>
+</generatorConfiguration>

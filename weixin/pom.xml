@@ -348,13 +348,13 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <webXml>WEB-INF/web.xml</webXml>
-                    <webResources>
+                    <!-- <webResources>
                         <resource>
                             <directory>WEB-INF</directory>
                             <filtering>true</filtering>
                             <targetPath>WEB-INF</targetPath>
                         </resource>
-                    </webResources>
+                    </webResources> -->
                 </configuration>
             </plugin>
         </plugins>
