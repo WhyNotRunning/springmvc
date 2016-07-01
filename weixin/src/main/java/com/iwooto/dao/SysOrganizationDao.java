@@ -1,8 +1,8 @@
 package com.iwooto.dao;
 
-import com.iwooto.bean.SysOrganization;
+import com.iwooto.entity.SysOrganization;
 
-public interface SysOrganizationMapper {
+public interface SysOrganizationDao {
     int deleteByPrimaryKey(Long id);
 
     int insert(SysOrganization record);

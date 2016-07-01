@@ -1,8 +1,8 @@
 package com.iwooto.dao;
 
-import com.iwooto.bean.SysRole;
+import com.iwooto.entity.SysRole;
 
-public interface SysRoleMapper {
+public interface SysRoleDao {
     int deleteByPrimaryKey(Long id);
 
     int insert(SysRole record);

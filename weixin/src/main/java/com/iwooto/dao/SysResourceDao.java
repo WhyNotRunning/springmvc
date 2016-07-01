@@ -1,8 +1,8 @@
 package com.iwooto.dao;
 
-import com.iwooto.bean.SysResource;
+import com.iwooto.entity.SysResource;
 
-public interface SysResourceMapper {
+public interface SysResourceDao {
     int deleteByPrimaryKey(Long id);
 
     int insert(SysResource record);

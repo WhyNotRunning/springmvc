@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.iwooto.dao.SysRoleMapper" >
-  <resultMap id="BaseResultMap" type="com.iwooto.bean.SysRole" >
+<mapper namespace="com.iwooto.dao.SysRoleDao" >
+  <resultMap id="BaseResultMap" type="com.iwooto.entity.SysRole" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="role" property="role" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
@@ -21,13 +21,13 @@
     delete from sys_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.iwooto.bean.SysRole" >
+  <insert id="insert" parameterType="com.iwooto.entity.SysRole" >
     insert into sys_role (id, role, description, 
       resource_ids, available)
     values (#{id,jdbcType=BIGINT}, #{role,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{resourceIds,jdbcType=VARCHAR}, #{available,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.iwooto.bean.SysRole" >
+  <insert id="insertSelective" parameterType="com.iwooto.entity.SysRole" >
     insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.iwooto.bean.SysRole" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwooto.entity.SysRole" >
     update sys_role
     <set >
       <if test="role != null" >
@@ -82,7 +82,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.iwooto.bean.SysRole" >
+  <update id="updateByPrimaryKey" parameterType="com.iwooto.entity.SysRole" >
     update sys_role
     set role = #{role,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.iwooto.dao.SysOrganizationMapper" >
-  <resultMap id="BaseResultMap" type="com.iwooto.bean.SysOrganization" >
+<mapper namespace="com.iwooto.dao.SysOrganizationDao" >
+  <resultMap id="BaseResultMap" type="com.iwooto.entity.SysOrganization" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="parent_id" property="parentId" jdbcType="BIGINT" />
@@ -21,13 +21,13 @@
     delete from sys_organization
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.iwooto.bean.SysOrganization" >
+  <insert id="insert" parameterType="com.iwooto.entity.SysOrganization" >
     insert into sys_organization (id, name, parent_id, 
       parent_ids, available)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
       #{parentIds,jdbcType=VARCHAR}, #{available,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.iwooto.bean.SysOrganization" >
+  <insert id="insertSelective" parameterType="com.iwooto.entity.SysOrganization" >
     insert into sys_organization
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.iwooto.bean.SysOrganization" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwooto.entity.SysOrganization" >
     update sys_organization
     <set >
       <if test="name != null" >
@@ -82,7 +82,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.iwooto.bean.SysOrganization" >
+  <update id="updateByPrimaryKey" parameterType="com.iwooto.entity.SysOrganization" >
     update sys_organization
     set name = #{name,jdbcType=VARCHAR},
       parent_id = #{parentId,jdbcType=BIGINT},

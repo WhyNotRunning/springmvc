@@ -1,8 +1,8 @@
 package com.iwooto.dao;
 
-import com.iwooto.bean.SysUser;
+import com.iwooto.entity.SysUser;
 
-public interface SysUserMapper {
+public interface SysUserDao {
     int deleteByPrimaryKey(Long id);
 
     int insert(SysUser record);
@@ -14,4 +14,6 @@ public interface SysUserMapper {
     int updateByPrimaryKeySelective(SysUser record);
 
     int updateByPrimaryKey(SysUser record);
+
+	com.iwooto.entity.SysUser findByUsername(String username);
 }
