@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/taglibs/taglibs.jsp"%>
-<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<!DOCTYPE HTML>
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
