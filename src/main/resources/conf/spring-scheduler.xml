@@ -18,18 +18,24 @@
     <!-- <property name="arguments" value="argsValue"/>--> 
   </bean>
   <!--配置调度执行的触发的时间-->
-  <bean id="myTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+  <bean id="weixinTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
     <property name="jobDetail" ref="myTriggerDetail" />
   	<property name="startDelay" value="0" />
- 	<property name="repeatInterval" value="30000" />
-
+ 	<property name="repeatInterval" value="36000000" />
   </bean>
+  <!-- <bean id="weekCronTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+      <property name="jobDetail" ref="myTriggerDetail" />  
+      <property name="cronExpression">   
+          <value>0 0/32 8,12 * * ?</value>  
+      </property>  
+  </bean> -->  
   <!-- quartz的调度工厂 调度工厂只能有一个，多个调度任务在list中添加 -->
   <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     <property name="triggers">
       <list>
-         <!-- 所有的调度列表--><!-- 
-        <ref local="myTrigger" /> -->
+         <!-- 所有的调度列表--> 
+        <!-- <ref local="weekCronTriggerBean" /> -->
+        <ref local="weixinTrigger" />
       </list>
     </property> 
   </bean>

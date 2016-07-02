@@ -11,8 +11,7 @@ import java.util.Properties;
 
 import javax.xml.bind.PropertyException;
 
-import org.apache.ibatis.builder.xml.dynamic.ForEachSqlNode;
-//import org.apache.ibatis.builder.xml.dynamic.ForEachSqlNode;
+import org.apache.ibatis.scripting.xmltags.ForEachSqlNode;
 import org.apache.ibatis.executor.ErrorContext;
 import org.apache.ibatis.executor.ExecutorException;
 import org.apache.ibatis.executor.statement.BaseStatementHandler;
