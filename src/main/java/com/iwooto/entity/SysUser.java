@@ -17,7 +17,8 @@ public class SysUser implements Serializable {
     private String username; //用户名
     private String password; //密码
     private String salt; //加密密码的盐
-    private List<Long> roleIds; //拥有的角色列表
+    private String roleIds; //拥有的角色列表
+    private List<Long> roleIdList; //拥有的角色列表
     private Boolean locked = Boolean.FALSE;
 
     public SysUser() {
@@ -72,24 +73,24 @@ public class SysUser implements Serializable {
         return username + salt;
     }
 
-    public List<Long> getRoleIds() {
-        if(roleIds == null) {
-            roleIds = new ArrayList<Long>();
+    public List<Long> getRoleIdList() {
+        if(roleIdList == null) {
+        	roleIdList = new ArrayList<Long>();
         }
-        return roleIds;
+        return roleIdList;
     }
 
-    public void setRoleIds(List<Long> roleIds) {
-        this.roleIds = roleIds;
+    public void setRoleIdList(List<Long> roleIdList) {
+        this.roleIdList = roleIdList;
     }
 
 
     public String getRoleIdsStr() {
-        if(CollectionUtils.isEmpty(roleIds)) {
+        if(CollectionUtils.isEmpty(roleIdList)) {
             return "";
         }
         StringBuilder s = new StringBuilder();
-        for(Long roleId : roleIds) {
+        for(Long roleId : roleIdList) {
             s.append(roleId);
             s.append(",");
         }
@@ -105,11 +106,19 @@ public class SysUser implements Serializable {
             if(StringUtils.isEmpty(roleIdStr)) {
                 continue;
             }
-            getRoleIds().add(Long.valueOf(roleIdStr));
+            getRoleIdList().add(Long.valueOf(roleIdStr));
         }
     }
     
-    public Boolean getLocked() {
+    public String getRoleIds() {
+		return roleIds;
+	}
+
+	public void setRoleIds(String roleIds) {
+		this.roleIds = roleIds;
+	}
+
+	public Boolean getLocked() {
         return locked;
     }
 

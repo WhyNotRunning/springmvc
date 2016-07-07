@@ -11,9 +11,10 @@
 	<properties>
 		<spring.version>4.2.5.RELEASE</spring.version>
 		<cxf.version>3.1.5</cxf.version>
-		<quartz.version>2.2.0</quartz.version>
+		<quartz.version>2.2.1</quartz.version>
 		<shiro.version>1.2.5</shiro.version>
 		<mybatis.version>3.3.0</mybatis.version>
+		<jackson.version>2.5.1</jackson.version>
 	</properties>
 	<dependencies>
 		<!-- spring jar start -->
@@ -260,11 +261,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-quartz</artifactId>
-			<version>${shiro.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-spring</artifactId>
 			<version>${shiro.version}</version>
 		</dependency>
@@ -285,7 +281,49 @@
 			<artifactId>poi-scratchpad</artifactId>
 			<version>3.14</version>
 		</dependency>
-		<!-- excel 导入jar包 start -->
+		<!-- excel 导入jar包 end -->
+		<!-- spring json 处理start -->
+		<!-- <dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-lgpl</artifactId>
+			<version>1.9.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-lgpl</artifactId>
+			<version>1.9.6</version>
+		</dependency> -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-jaxb-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<!-- spring json 处理end -->
 		<!-- 自定义标签taglib -->
 		<dependency>
 			<groupId>org.apache.taglibs</groupId>
@@ -365,6 +403,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
+					<encoding>UTF-8</encoding>
 					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
 					<!-- <webResources>
 						<resource>

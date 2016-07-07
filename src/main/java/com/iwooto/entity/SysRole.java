@@ -11,13 +11,22 @@ public class SysRole implements Serializable {
     private Long id; //编号
     private String role; //角色标识 程序中判断使用,如"admin"
     private String description; //角色描述,UI界面显示使用
-    private List<Long> resourceIds; //拥有的资源
+    private String resourceIds; //拥有的资源
+    private List<Long> resIds; //拥有的资源
     private Boolean available = Boolean.FALSE; //是否可用,如果不可用将不会添加给用户
 
     public SysRole() {
     }
 
-    public SysRole(String role, String description, Boolean available) {
+    public String getResourceIds() {
+		return resourceIds;
+	}
+
+	public void setResourceIds(String resourceIds) {
+		this.resourceIds = resourceIds;
+	}
+
+	public SysRole(String role, String description, Boolean available) {
         this.role = role;
         this.description = description;
         this.available = available;
@@ -47,24 +56,24 @@ public class SysRole implements Serializable {
         this.description = description;
     }
 
-    public List<Long> getResourceIds() {
-        if(resourceIds == null) {
-            resourceIds = new ArrayList<Long>();
+    public List<Long> getResIds() {
+        if(resIds == null) {
+        	resIds = new ArrayList<Long>();
         }
-        return resourceIds;
+        return resIds;
     }
 
-    public void setResourceIds(List<Long> resourceIds) {
-        this.resourceIds = resourceIds;
+    public void setResIds(List<Long> resIds) {
+        this.resIds = resIds;
     }
 
     public String getResourceIdsStr() {
-        if(CollectionUtils.isEmpty(resourceIds)) {
+        if(CollectionUtils.isEmpty(resIds)) {
             return "";
         }
         StringBuilder s = new StringBuilder();
-        for(Long resourceId : resourceIds) {
-            s.append(resourceId);
+        for(Long resIds : resIds) {
+            s.append(resIds);
             s.append(",");
         }
         return s.toString();
@@ -79,7 +88,7 @@ public class SysRole implements Serializable {
             if(StringUtils.isEmpty(resourceIdStr)) {
                 continue;
             }
-            getResourceIds().add(Long.valueOf(resourceIdStr));
+            getResIds().add(Long.valueOf(resourceIdStr));
         }
     }
 

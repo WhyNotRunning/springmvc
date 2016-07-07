@@ -4,9 +4,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<!-- 命名空间 -->
-	<typeAliases>
+	<!-- <typeAliases>
 		<typeAlias alias="SysUser" type="com.iwooto.entity.SysUser" />
-	</typeAliases>
+	</typeAliases> -->
 	 <!-- <plugins>  
        <plugin interceptor="com.drawback.inteceptor.PageInteceptor">  
            <property name="dialect" value="sqlServer"/>
@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
        </plugin>  
     </plugins>  --> 
 	<!-- 映射map -->
-	<mappers>
+	<!-- <mappers>
 		<mapper resource="com/iwooto/mapper/SysUserMapper.xml"/>
-	</mappers>
+	</mappers> -->
 </configuration>

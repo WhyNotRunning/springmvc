@@ -40,7 +40,7 @@ public class RoleServiceImpl implements RoleService {
         for(Long roleId : roleIds) {
             SysRole role = findOne(roleId);
             if(role != null) {
-                resourceIds.addAll(role.getResourceIds());
+                resourceIds.addAll(role.getResIds());
             }
         }
         return sysResourceService.findPermissions(resourceIds);

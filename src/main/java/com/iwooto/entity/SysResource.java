@@ -3,20 +3,25 @@ package com.iwooto.entity;
 import java.io.Serializable;
 
 public class SysResource implements Serializable {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Long id; //编号
     private String name; //资源名称
-    private ResourceType type = ResourceType.menu; //资源类型
+    private String type; //资源类型
+    private ResourceType resourceType = ResourceType.menu; //资源类型
     private String url; //资源路径
     private String permission; //权限字符串
     private Long parentId; //父编号
     private String parentIds; //父编号列表
     private Boolean available = Boolean.FALSE;
 
-    public static enum ResourceType {
+    public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public static enum ResourceType {
         menu("菜单"), button("按钮");
 
         private final String info;
@@ -47,12 +52,12 @@ public class SysResource implements Serializable {
         this.name = name;
     }
 
-    public ResourceType getType() {
-        return type;
+    public ResourceType getResourceType() {
+        return resourceType;
     }
 
-    public void setType(ResourceType type) {
-        this.type = type;
+    public void setResourceType(ResourceType resourceType) {
+        this.resourceType = resourceType;
     }
 
     public String getUrl() {
