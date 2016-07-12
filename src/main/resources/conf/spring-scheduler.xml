@@ -2,7 +2,7 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="http://www.springframework.org/schema/beans"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
     default-lazy-init="false">
     
  <!-- 添加调度的任务bean 配置对应的class-->
@@ -33,7 +33,8 @@
     <property name="triggers">
       <list>
          <!-- 所有的调度列表--> 
-        <ref local="weekCronTriggerBean" />
+        <!-- <ref local="weekCronTriggerBean" /> -->
+        <ref bean="weekCronTriggerBean" />
         <!-- <ref local="weixinTrigger" /> -->
       </list>
     </property> 

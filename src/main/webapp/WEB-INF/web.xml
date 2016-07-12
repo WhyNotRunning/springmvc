@@ -22,7 +22,16 @@
   </listener>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:conf/spring.xml,classpath:conf/spring-mybatis.xml,classpath:conf/spring-scheduler.xml,classpath:conf/spring-cxf.xml,classpath:conf/spring-websocket.xml</param-value>
+    <param-value>
+        classpath:conf/spring.xml,
+        classpath:conf/spring-mybatis.xml,
+        classpath:conf/spring-scheduler.xml,
+        classpath:conf/spring-cxf.xml,
+        classpath:conf/spring-websocket.xml,
+        classpath:conf/spring-mvc-shiro.xml,
+        classpath:conf/spring-config-cache.xml,
+        classpath:conf/spring-config-shiro.xml
+    </param-value>
   </context-param>
   <filter>
     <filter-name>encodingFilter</filter-name>
@@ -45,6 +54,23 @@
   <listener>
     <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
   </listener>
+  
+  <!-- shiro 安全过滤器 -->
+  <filter>
+      <filter-name>shiroFilter</filter-name>
+      <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+      <async-supported>true</async-supported>
+      <init-param>
+          <param-name>targetFilterLifecycle</param-name>
+          <param-value>true</param-value>
+      </init-param>
+  </filter>
+
+  <filter-mapping>
+      <filter-name>shiroFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+      <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
   <servlet>
     <description>spring mvc servlet</description>
     <servlet-name>springMvc</servlet-name>
