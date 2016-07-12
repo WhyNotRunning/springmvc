@@ -1,22 +1,30 @@
 package com.iwooto.controller;
 
+import java.util.List;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iwooto.annotation.CurrentUser;
 import com.iwooto.common.BaseController;
+import com.iwooto.entity.SysResource;
+import com.iwooto.entity.SysUser;
+import com.iwooto.service.ResourceService;
+import com.iwooto.service.UserService;
 
 /**
  * 
  * @author Administrator
  *
  */
-@RequestMapping("")
 @Controller
 public class HomeController extends BaseController{
 
@@ -24,6 +32,10 @@ public class HomeController extends BaseController{
 	private  static String WEBSOCKET = "websocket";
 	
 
+    @Autowired
+    private ResourceService resourceService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/")
     public String index(Model model) throws Exception {
@@ -41,12 +53,10 @@ public class HomeController extends BaseController{
     }
     
     @RequestMapping(value = "/nav")
-    public String nav(HttpSession session, Model model) throws Exception {
-//    	String username = (String) SecurityUtils.getSubject().getPrincipal();
-//    	User user = this.userService.getUserByName(username);
-//        List<GroupAndResource> grList = this.grService.getResource(user.getGroup().getId());
-//        List<Resource> menus = this.resourceService.getMenus(grList);
-//        model.addAttribute("menuList", menus);
+    public String nav(@CurrentUser SysUser loginUser, Model model) throws Exception {
+        Set<String> permissions = userService.findPermissions(loginUser.getUsername());
+        List<SysResource> menus = resourceService.findMenus(permissions);
+        model.addAttribute("menuList", menus);
     	return "main/nav";
     }
 	@RequestMapping("/home")

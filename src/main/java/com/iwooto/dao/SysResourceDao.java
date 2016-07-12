@@ -1,5 +1,7 @@
 package com.iwooto.dao;
 
+import java.util.List;
+
 import com.iwooto.entity.SysResource;
 
 public interface SysResourceDao {
@@ -14,4 +16,6 @@ public interface SysResourceDao {
     int updateByPrimaryKeySelective(SysResource record);
 
     int updateByPrimaryKey(SysResource record);
+
+	List<SysResource> findAll();
 }

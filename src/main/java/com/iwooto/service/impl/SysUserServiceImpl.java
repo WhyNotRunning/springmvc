@@ -49,8 +49,7 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public SysUser findByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		return sysuserdao.findByUsername(username);
 	}
 
 }

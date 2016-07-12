@@ -11,6 +11,21 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd
 http://www.springframework.org/schema/mvc 
 http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
+	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
+	<context:component-scan base-package="com.iwooto.controller"  use-default-filters="false">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+    <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <bean class="com.iwooto.annotation.CurrentUserMethodArgumentResolver"/>
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+
+    <!-- 当在web.xml 中   DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
+    <mvc:default-servlet-handler/> 
     <bean id="utf8Charset" class="java.nio.charset.Charset"
           factory-method="forName">
         <constructor-arg value="UTF-8"/>
@@ -21,9 +36,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
                 <constructor-arg ref="utf8Charset"/>
             </bean>
         </mvc:message-converters>
-    </mvc:annotation-driven>
-	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
-	<context:component-scan base-package="com.iwooto.controller" />   
+    </mvc:annotation-driven>  
    <!-- 开启注解(在spring中默认情况下，注解是关闭的) -->
     <mvc:annotation-driven/>
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >
@@ -76,13 +89,12 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/login"/>
 			<mvc:exclude-mapping path="/check"/>
-			<mvc:exclude-mapping path="/gotologin"/>
-			<mvc:exclude-mapping path="/bootstrap/**"/>
-			<mvc:exclude-mapping path="/images/**"/>
-			<mvc:exclude-mapping path="/css/**"/>
-			<mvc:exclude-mapping path="/js/**"/>
 			<!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 --> 
 			<bean id="userInteceptor" class="com.iwooto.inteceptor.UserInteceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors> 
+		
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 </beans>

@@ -12,8 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/loginAction")
-public class LoginAction {
+public class LoginController {
 
 	@RequestMapping(value = "/login")
     public String showLoginForm(HttpServletRequest req, Model model) {
