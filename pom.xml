@@ -386,11 +386,17 @@
 		    <version>1.0</version>
 		</dependency> -->
 		<!-- dubbo -->
-		<!-- <dependency>
+		<dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>dubbo</artifactId>
 		    <version>2.5.3</version>
-		</dependency> -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
 	</dependencies>
 	<!-- <distributionManagement> <snapshotRepository> <id>baemaven-snapshots</id> 
