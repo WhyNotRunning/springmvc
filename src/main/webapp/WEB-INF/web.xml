@@ -41,7 +41,20 @@
   <listener>
     <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
   </listener>
-  
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+        classpath:conf/spring.xml,
+        classpath:conf/spring-mybatis.xml,
+        classpath:conf/spring-scheduler.xml,
+        classpath:conf/spring-cxf.xml,
+        classpath:conf/spring-websocket.xml,
+        classpath:conf/spring-mvc-shiro.xml,
+        classpath:conf/spring-config-cache.xml,
+        classpath:conf/spring-config-shiro.xml
+    </param-value>
+  </context-param>
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
