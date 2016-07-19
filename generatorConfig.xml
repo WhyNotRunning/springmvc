@@ -19,7 +19,7 @@
     <sqlMapGenerator targetPackage="com.iwooto.mapper" targetProject="weixin\src\main\resources" />
     <javaClientGenerator targetPackage="com.iwooto.dao" targetProject="weixin" type="XMLMAPPER" />
     
-    <table tableName="sys_user" domainObjectName="SysUser"
+    <!-- <table tableName="sys_user" domainObjectName="SysUser"
         enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false"
         selectByExampleQueryId="false">
@@ -35,6 +35,11 @@
         selectByExampleQueryId="false">
     </table>
     <table tableName="sys_resource" domainObjectName="SysResource"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false">
+    </table> -->
+    <table tableName="sys_url_filter" domainObjectName="UrlFilter"
         enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false"
         selectByExampleQueryId="false">

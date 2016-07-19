@@ -131,26 +131,63 @@
            /** = user,sysUser       访问该地址的用户是身份验证通过或RememberMe登录的都可以；user、authc、logout都为Shiro默认的拦截器
        </value>
     -->
-    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+<!--     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login"/>
         <property name="filters">
             <util:map>
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
                 <entry key="kickout" value-ref="kickoutSessionControlFilter"/>
-                <!-- <entry key="jCaptchaValidate" value-ref="jCaptchaValidateFilter"/> -->
+                <entry key="jCaptchaValidate" value-ref="jCaptchaValidateFilter"/>
                 <entry key="sysUser" value-ref="sysUserFilter"/>
                 <entry key="forceLogout" value-ref="forceLogoutFilter"/>
             </util:map>
         </property>
         <property name="filterChainDefinitions">
             <value>
-                /login = <!-- jCaptchaValidate, -->authc
+                /login = jCaptchaValidate,authc
                 /logout = logout
                 /authenticated = authc
                 /** =  user,forceLogout,sysUser,kickout
             </value>
         </property>
+    </bean> -->
+    
+    
+    <bean id="filterChainManager" class="com.iwooto.spring.CustomDefaultFilterChainManager">
+        <property name="loginUrl" value="/login"/>
+        <property name="successUrl" value="/"/>
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+
+        <property name="customFilters">
+            <util:map>
+                <entry key="authc" value-ref="formAuthenticationFilter"/>
+                <entry key="sysUser" value-ref="sysUserFilter"/>
+            </util:map>
+        </property>
+        <property name="defaultFilterChainDefinitions">
+            <value>
+                /login = authc
+                /logout = logout
+                /unauthorized.jsp = authc
+                /** = user,sysUser
+            </value>
+        </property>
+    </bean>
+
+    <bean id="filterChainResolver" class="com.iwooto.spring.CustomPathMatchingFilterChainResolver">
+        <property name="customDefaultFilterChainManager" ref="filterChainManager"/>
+    </bean>
+
+    <!-- Shiro的Web过滤器 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="shiroFilter"/>
+        <property name="targetMethod" value="setFilterChainResolver"/>
+        <property name="arguments" ref="filterChainResolver"/>
     </bean>
 
     <!-- Shiro生命周期处理器-->
