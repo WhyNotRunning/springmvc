@@ -41,13 +41,7 @@
   <listener>
     <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
   </listener>
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-  
-=======
->>>>>>> 7d34d590db4ff3d59ce8bd2e33fedda81ca89e1e
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
@@ -60,12 +54,7 @@
         classpath:conf/spring-config-cache.xml,
         classpath:conf/spring-config-shiro.xml
     </param-value>
-<<<<<<< HEAD
   </context-param>
-=======
-  </context-param>
->>>>>>> 3dc8366ce96d870ab9ec57509be39a6ef84b6f93
->>>>>>> 7d34d590db4ff3d59ce8bd2e33fedda81ca89e1e
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -78,22 +67,7 @@
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
-<<<<<<< HEAD
   </filter-mapping>
-=======
-  </filter-mapping>
-<<<<<<< HEAD
-=======
-  <listener>
-    <description>spring监听器</description>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-    <!-- Spring 刷新Introspector防止内存泄露 --> 
-  <listener>
-    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
-  </listener>
->>>>>>> 3dc8366ce96d870ab9ec57509be39a6ef84b6f93
->>>>>>> 7d34d590db4ff3d59ce8bd2e33fedda81ca89e1e
   
   <!-- shiro 安全过滤器 -->
   <filter>
