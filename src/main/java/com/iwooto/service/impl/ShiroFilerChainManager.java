@@ -18,7 +18,7 @@ import java.util.Map;
  * <p>Date: 14-2-25
  * <p>Version: 1.0
  */
-@Service
+//@Service
 public class ShiroFilerChainManager {
 
     @Autowired

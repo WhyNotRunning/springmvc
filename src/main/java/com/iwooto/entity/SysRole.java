@@ -59,6 +59,7 @@ public class SysRole implements Serializable {
     public List<Long> getResIds() {
         if(resIds == null) {
         	resIds = new ArrayList<Long>();
+        	setResourceIdsStr(this.resourceIds);
         }
         return resIds;
     }

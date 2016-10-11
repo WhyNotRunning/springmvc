@@ -41,7 +41,15 @@
   <listener>
     <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
   </listener>
-
+  <filter>
+     <filter-name>XssSqlFilter</filter-name>
+     <filter-class>com.iwooto.filter.XssFilter</filter-class>
+  </filter>
+  <filter-mapping>
+     <filter-name>XssSqlFilter</filter-name>
+     <url-pattern>/*</url-pattern>
+     <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>

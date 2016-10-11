@@ -7,9 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>top</title>
 
-<link rel="stylesheet" href="${ctx}/css/style.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/css/top.css" type="text/css" />
-
 </head>
 
 <body>
