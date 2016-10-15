@@ -41,6 +41,14 @@ public final class CSRFTokenManager {
         return token;
     }
 
+    public static String getRefreshTokenForSession(HttpSession session) {
+        String token = null;
+        synchronized (session) {
+            token = UUID.randomUUID().toString();
+            session.setAttribute(CSRF_TOKEN_FOR_SESSION_ATTR_NAME, token);
+        }
+        return token;
+    }
     /**
      * Extracts the token value from the session
      * 
