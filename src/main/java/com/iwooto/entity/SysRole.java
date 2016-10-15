@@ -73,8 +73,8 @@ public class SysRole implements Serializable {
             return "";
         }
         StringBuilder s = new StringBuilder();
-        for(Long resIds : resIds) {
-            s.append(resIds);
+        for(Long resId : resIds) {
+            s.append(resId);
             s.append(",");
         }
         return s.toString();
