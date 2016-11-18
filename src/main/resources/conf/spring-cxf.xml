@@ -21,7 +21,9 @@
                 <!-- 指使用用户名令牌设置加密类型 -->  
                 <entry key="action" value="UsernameToken" />  
                 <!-- PasswordText采用UsernameToken的加密策略,默认为 WSConstants.PW_DIGEST，即PasswordDigest。这里直接文本设置密码类型为明文 -->  
-                <entry key="passwordType" value="PasswordText" />  
+                <entry key="passwordType" value="PasswordText" /> 
+		<!--当前拦截器制定的服务器用户-->
+                <entry key="user" value="server" />  
 		<!--指定获取对象password的方式，需要实现CallbackHandler-->
                 <entry key="passwordCallbackRef" value-ref="serverPasswordCallback"/>  
             </map>  
